@@ -3,17 +3,16 @@ import numpy as np
 
 class N_ArmedBandit(EnvironmentBase):
 
-	def __init__(self, num_arms, means=None, stdevs=None):
+	def __init__(self, means=[], stdevs=[]):
 
 		EnvironmentBase.__init__(self)
 
-		self.num_arms = num_arms
-		self.means = []
-		self.stdevs = []
+		if len(means) != len(stdevs):
+			raise ValueError("N_ArmedBandit, means and stdevs have different length")
 
-		if (means==None) or (stdevs==None):
-			#generate standard normal action values
-			
+		self.means = means
+		self.stdevs = stdevs
 
 	def reward(self, action):
 
+		return stdevs[action]*np.random.randn()+means[action]
