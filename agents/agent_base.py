@@ -1,13 +1,14 @@
 class AgentBase:
 
 	def __init__(self):
-
+		'''
+		initializer, empty for now
+		'''
 	def act(self):
 		'''
 		The act function should return an action based on the
 		agent's current status
 		'''
-
 		raise RuntimeError("act method not implemented for class "+\
 			self.__class__)
 
@@ -19,7 +20,6 @@ class AgentBase:
 		e.g. we already have a list of (state,action,reward)
 		tuples which we wish to use to initialize the agent
 		'''
-
 		raise RuntimeError("fit method not implemented for class "+\
 		 self.__class__)
 
@@ -32,6 +32,5 @@ class AgentBase:
 		observation and must update its action-value
 		estimates
 		'''
-
 		raise RuntimeError("update method not implemented for class "+\
 		 self.__class__)

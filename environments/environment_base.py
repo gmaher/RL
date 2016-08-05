@@ -1,7 +1,9 @@
 class EnvironmentBase:
 
 	def __init__(self):
-
+		'''
+		Initializer, empty for now
+		'''
 	def reward(self):
 		'''
 		reward should take in an action and return a number based on
