@@ -17,14 +17,14 @@ class Greedy(AgentBase):
 		self.num_observations = np.ones((num_arms))
 		self.eps = eps
 
-	def act(self):
+	def act(self, s=None):
 		x = np.random.rand()
 		if x >= self.eps:
 			return np.argmax(self.value_estimates)
 		else:
 			return np.random.randint(0,self.num_arms)
 
-	def update(self,action,reward):
+	def update(self,action,reward, state):
 		self.num_observations[action] += 1
 		qold = self.value_estimates[action]
 		qnew = qold + 1.0/(self.num_observations[action])*(reward-qold)

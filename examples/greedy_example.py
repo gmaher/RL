@@ -4,6 +4,7 @@ sys.path.insert(0, os.path.abspath("../"))
 
 from agents.greedy import Greedy
 from environments.n_armed_bandit import N_ArmedBandit
+from util.util import episode
 
 import plotly as py
 import plotly.graph_objs as go
@@ -17,6 +18,7 @@ N-armed bandit problem
 '''
 
 Niter = 500
+T = range(0,Niter)
 
 means = [1,2,10,2,1]
 stdevs = [3,3,3,3,3]
@@ -30,36 +32,17 @@ eps = Greedy(initial_values=pessimistic_guess, eps=0.05)
 
 env = N_ArmedBandit(means=means,stdevs=stdevs)
 
-opt_actions = []
-opt_rewards = []
-pes_actions = []
-pes_rewards = []
-eps_actions = []
-eps_rewards = []
+opt_states, opt_actions, opt_rewards = \
+episode(opt.act, env.update_state, env.reward, 1, update_agent=opt.update,
+ max_iter=Niter, collect_history=True)
 
-T = range(0,Niter)
+pes_states, pes_actions, pes_rewards = \
+episode(pes.act, env.update_state, env.reward, 1, update_agent=pes.update,
+ max_iter=Niter, collect_history=True)
 
-for t in T:
-
-	a_opt = opt.act()
-	a_pes = pes.act()
-	a_eps = eps.act()
-
-	r_opt = env.reward(a_opt)
-	r_pes = env.reward(a_pes)
-	r_eps = env.reward(a_eps)
-
-	opt.update(a_opt,r_opt)
-	pes.update(a_pes,r_pes)
-	eps.update(a_eps,r_eps)
-
-	opt_actions.append(a_opt)
-	pes_actions.append(a_pes)
-	eps_actions.append(a_eps)
-
-	opt_rewards.append(r_opt)
-	pes_rewards.append(r_pes)
-	eps_rewards.append(r_eps)
+eps_states, eps_actions, eps_rewards = \
+episode(eps.act, env.update_state, env.reward, 1, update_agent=eps.update,
+ max_iter=Niter, collect_history=True)
 
 best = np.cumsum((np.ones(Niter)*means[2]))
 

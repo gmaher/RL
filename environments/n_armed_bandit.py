@@ -17,5 +17,8 @@ class N_ArmedBandit(EnvironmentBase):
 		self.means = means
 		self.stdevs = stdevs
 
-	def reward(self, action):
+	def reward(self, action, state, state_prime):
 		return self.stdevs[action]*np.random.randn()+self.means[action]
+
+	def update_state(self, state, action):
+		return 1
