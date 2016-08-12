@@ -48,5 +48,6 @@ def episode(act, update_state, reward, init_state, stop_function=None,
 				break
 
 		it = it+1
-
+		s = sprime
+		
 	return (states,actions,rewards)
