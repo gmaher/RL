@@ -41,7 +41,7 @@ def episode(act, update_state, reward, init_state, stop_function=None,
 		if collect_history:
 			actions.append(a)
 			rewards.append(r)
-			states.append(sprime)
+			states.append(s)
 
 		if stop_function != None:
 			if stop_function(sprime):

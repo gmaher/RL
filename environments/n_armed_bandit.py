@@ -21,4 +21,4 @@ class N_ArmedBandit(EnvironmentBase):
 		return self.stdevs[action]*np.random.randn()+self.means[action]
 
 	def update_state(self, state, action):
-		return 1
+		return 0
